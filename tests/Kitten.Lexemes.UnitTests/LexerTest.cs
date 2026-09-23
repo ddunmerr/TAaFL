@@ -1,4 +1,4 @@
-﻿namespace Kitten.Lexemes.UnitTests;
+namespace Kitten.Lexemes.UnitTests;
 
 public class LexerTest
 {
@@ -342,6 +342,10 @@ public class LexerTest
             {
                 // Только комментарии
                 "// /* */", []
+            },
+            {
+                // Незакрытый блочный комментарий
+                "/* abc", []
             },
         };
     }
