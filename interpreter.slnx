@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Kitten.Lexemes/Kitten.Lexemes.csproj" Id="f0885db8-1dd1-4050-8ae5-c7eddab5cf72" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Kitten.Lexemes.UnitTests/Kitten.Lexemes.UnitTests.csproj" Id="55a735be-9294-46be-93c0-e08e1cca1627" />
+  </Folder>
+</Solution>
