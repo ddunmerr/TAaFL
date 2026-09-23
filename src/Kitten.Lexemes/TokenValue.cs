@@ -7,7 +7,6 @@ namespace Kitten.Lexemes;
 /// </summary>
 public class TokenValue
 {
-
     private readonly object _value;
 
     public TokenValue(string value)
@@ -32,19 +31,6 @@ public class TokenValue
         {
             string s => s,
             int d => d.ToString(CultureInfo.InvariantCulture),
-            _ => throw new NotImplementedException(),
-        };
-    }
-
-    /// <summary>
-    /// Возвращает значение токена в виде целого числа.
-    /// </summary>
-    public int ToInt()
-    {
-        return _value switch
-        {
-            string s => int.Parse(s, CultureInfo.InvariantCulture),
-            int i => i,
             _ => throw new NotImplementedException(),
         };
     }
