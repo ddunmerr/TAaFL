@@ -265,7 +265,7 @@ public class Lexer
 
         char ch1 = _scanner.Peek();
 
-        // Разбор простой escape-последовательности: "\n", "\"" и так далее.
+        // Разбор простой escape-последовательности.
         if (Escapes.TryGetValue(ch1, out char unescaped1))
         {
             _scanner.Advance();
@@ -321,10 +321,19 @@ public class Lexer
     /// </summary>
     private void SkipWhiteSpaces()
     {
-        while (char.IsWhiteSpace(_scanner.Peek()))
+        while (IsWhiteSpace(_scanner.Peek()))
         {
             _scanner.Advance();
         }
+    }
+
+    /// <summary>
+    /// Проверяет, является ли символ пробельным согласно спецификации языка:
+    /// пробел, горизонтальная табуляция, перевод строки, возврат каретки, form feed.
+    /// </summary>
+    private static bool IsWhiteSpace(char c)
+    {
+        return c == ' ' || c == '\t' || c == '\n' || c == '\r' || c == '\f';
     }
 
     /// <summary>

@@ -290,6 +290,15 @@ public class LexerTest
                 "✈️", [new Token(TokenType.Error, "\u2708"),
                        new Token(TokenType.Error, "\ufe0f")]
             },
+            {
+                // Строка, заканчивающаяся обратным слешем перед концом файла.
+                """
+                "abc\
+                """,
+                [
+                    new Token(TokenType.Error, "abc\\"),
+                ]
+            },
         };
     }
 
