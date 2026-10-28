@@ -26,7 +26,7 @@ public class Parser
     /// <summary>
     /// Разбирает и выполняет программу.
     /// Правило:
-    ///     program = function_declaration, end_of_file ;
+    ///     program = main_function_declaration, end_of_file ;
     /// </summary>
     public void ParseProgram()
     {
@@ -37,7 +37,7 @@ public class Parser
     /// <summary>
     /// Разбирает объявление функции main.
     /// Правило:
-    ///     function_declaration = "func", "main", "(", ")", "->", "void", block ;
+    ///     main_function_declaration = "func", "main", "(", ")", "->", "void", block ;
     /// </summary>
     private void ParseMainFunctionDeclaration()
     {
@@ -252,8 +252,7 @@ public class Parser
     /// <summary>
     /// Разбирает и выполняет вызов встроенной функции.
     /// Правило:
-    ///     function_call = ("readInt" | "min" | "max" | "sqr"),
-    ///         "(", [ arguments ], ")" ;
+    ///     function_call = read_int_call | min_max_call | sqr_call ;
     /// </summary>
     private int ParseFunctionCall()
     {

@@ -91,6 +91,12 @@ public class RuntimeErrorTests
                 "Invalid integer input: '1.4'"
             },
             {
+                "func main() -> void { print(readInt()); }",
+                "1 2 3\n",
+                "",
+                "Invalid integer input: '1 2 3'"
+            },
+            {
                 "func main() -> void { print(7); print(10 / 0); print(9); }",
                 "",
                 "7\n",
