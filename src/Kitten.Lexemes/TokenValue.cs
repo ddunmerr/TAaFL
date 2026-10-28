@@ -70,7 +70,7 @@ public class TokenValue
     }
 
     /// <summary>
-    ///  Возвращает хеш от значения токена.
+    /// Явное определение стандартной функции GetHashCode.
     /// </summary>
     public override int GetHashCode()
     {

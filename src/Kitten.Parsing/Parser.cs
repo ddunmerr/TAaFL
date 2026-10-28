@@ -30,7 +30,7 @@ public class Parser
     /// </summary>
     public void ParseProgram()
     {
-        ParseFunctionDeclaration();
+        ParseMainFunctionDeclaration();
         Match(TokenType.EndOfFile);
     }
 
@@ -39,7 +39,7 @@ public class Parser
     /// Правило:
     ///     function_declaration = "func", "main", "(", ")", "->", "void", block ;
     /// </summary>
-    private void ParseFunctionDeclaration()
+    private void ParseMainFunctionDeclaration()
     {
         Match(TokenType.Func);
         MatchIdentifier("main");
@@ -156,8 +156,8 @@ public class Parser
     /// <summary>
     /// Разбирает и вычисляет выражение с операторами умножения и деления.
     /// Правило:
-    ///     multiplicative_expression = primary_expression,
-    ///         { ("*" | "/"), primary_expression } ;
+    ///     multiplicative_expression = unary_expression,
+    ///         { ("*" | "/"), unary_expression } ;
     /// </summary>
     private int ParseMultiplicativeExpression()
     {
@@ -166,23 +166,24 @@ public class Parser
         while (_tokens.Peek().Type == TokenType.Multiply
                || _tokens.Peek().Type == TokenType.Divide)
         {
-            TokenType op = _tokens.Peek().Type;
+            Token op = _tokens.Peek();
             _tokens.Advance();
 
-            int right = ParsePrimaryExpression();
+            int right = ParseUnaryExpression();
 
-            if (op == TokenType.Multiply)
+            try
             {
-                left = checked(left * right);
+                left = op.Type == TokenType.Multiply
+                    ? checked(left * right)
+                    : left / right;
             }
-            else
+            catch (DivideByZeroException)
             {
-                if (right == 0)
-                {
-                    throw new ParseException("Division by zero", _tokens.Peek());
-                }
-
-                left = left / right;
+                throw new ParseException("Division by zero", op);
+            }
+            catch (OverflowException)
+            {
+                throw new ParseException("Integer overflow", op);
             }
         }
 
@@ -287,7 +288,14 @@ public class Parser
                     Match(TokenType.OpenParenthesis);
                     int x = ParseExpression();
                     Match(TokenType.CloseParenthesis);
-                    return checked(x * x);
+                    try
+                    {
+                        return checked(x * x);
+                    }
+                    catch (OverflowException)
+                    {
+                        throw new ParseException("Integer overflow", t);
+                    }
                 }
 
             default:

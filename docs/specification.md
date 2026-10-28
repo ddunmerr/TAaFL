@@ -123,11 +123,13 @@ primary_expression = integer_literal
     | "(", expression, ")" ;
 
 (* Вызов встроенной функции *)
-function_call = ("readInt" | "min" | "max" | "sqr"), "(", [ arguments ], ")" ;
+function_call = read_int_call | min_max_call | sqr_call ;
 
-arguments = expression, { ",", expression } ;
+read_int_call = "readInt", "(", ")" ;
 
-end_of_file = ? признак конца файла ? ;
+min_max_call = ("min" | "max"), "(", expression, ",", expression, ")" ;
+
+sqr_call = "sqr", "(", expression, ")" ;
 ```
 
 ### Ассоциативность операторов

@@ -17,8 +17,10 @@ public class CliTests
 
         // Assert
         Assert.Equal(1, exitCode);
-        Assert.Empty(output.ToString());
-        Assert.NotEmpty(error.ToString());
+        Assert.Equal("", output.ToString());
+        Assert.Equal(
+            "Usage: Kitten.Interpreter <path-to-file>" + "\n",
+            NormalizeLineEndings(error.ToString()));
     }
 
     [Fact]
@@ -34,8 +36,10 @@ public class CliTests
 
         // Assert
         Assert.Equal(1, exitCode);
-        Assert.Empty(output.ToString());
-        Assert.NotEmpty(error.ToString());
+        Assert.Equal("", output.ToString());
+        Assert.Equal(
+            "File not found: notexisting.kit" + "\n",
+            NormalizeLineEndings(error.ToString()));
     }
 
     [Fact]
@@ -56,7 +60,7 @@ public class CliTests
             // Assert
             Assert.Equal(0, exitCode);
             Assert.Equal("5\n", NormalizeLineEndings(output.ToString()));
-            Assert.Empty(error.ToString());
+            Assert.Equal("", error.ToString());
         }
         finally
         {
@@ -81,8 +85,10 @@ public class CliTests
 
             // Assert
             Assert.Equal(1, exitCode);
-            Assert.Empty(output.ToString());
-            Assert.NotEmpty(error.ToString());
+            Assert.Equal("", output.ToString());
+            Assert.Equal(
+                "Expected expression, got CloseParenthesis" + "\n",
+                NormalizeLineEndings(error.ToString()));
         }
         finally
         {
@@ -107,8 +113,10 @@ public class CliTests
 
             // Assert
             Assert.Equal(1, exitCode);
-            Assert.Empty(output.ToString());
-            Assert.NotEmpty(error.ToString());
+            Assert.Equal("", output.ToString());
+            Assert.Equal(
+                "Division by zero" + "\n",
+                NormalizeLineEndings(error.ToString()));
         }
         finally
         {
