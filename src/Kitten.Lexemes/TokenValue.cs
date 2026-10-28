@@ -36,6 +36,22 @@ public class TokenValue
     }
 
     /// <summary>
+    /// Возвращает значение токена в виде целого числа.
+    /// </summary>
+    /// <exception cref="FormatException">
+    /// Значение токена не является целым числом.
+    /// </exception>
+    public int ToInt()
+    {
+        return _value switch
+        {
+            int i => i,
+            string s => int.Parse(s, CultureInfo.InvariantCulture),
+            _ => throw new NotImplementedException(),
+        };
+    }
+
+    /// <summary>
     ///  Проверяет равенство значений токенов. Значения разных типов всегда считаются разными.
     /// </summary>
     public override bool Equals(object? obj)

@@ -299,6 +299,23 @@ public class LexerTest
                     new Token(TokenType.Error, "abc\\"),
                 ]
             },
+            {
+                // Неэкранированный перенос строки внутри строкового литерала.
+                "\"abc\ndef\"",
+
+                [
+                    new Token(TokenType.StringLiteral, "abc\ndef"),
+                ]
+            },
+            {
+                // Строковый литерал с не-ASCII содержимым.
+                """
+                "Привет"
+                """,
+                [
+                    new Token(TokenType.StringLiteral, "Привет"),
+                ]
+            },
         };
     }
 
@@ -355,6 +372,10 @@ public class LexerTest
             {
                 // Незакрытый блочный комментарий
                 "/* abc", []
+            },
+            {
+                // Пустой блочный комментарий.
+                "/**/", []
             },
         };
     }
