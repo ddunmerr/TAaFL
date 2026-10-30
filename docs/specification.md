@@ -113,7 +113,7 @@ additive_expression = multiplicative_expression,
 multiplicative_expression = unary_expression,
     { ("*" | "/"), unary_expression } ;
 
-unary_expression = [ "-" ], primary_expression ;
+unary_expression = { "-" }, primary_expression ;
 
 primary_expression = integer_literal
     | function_call

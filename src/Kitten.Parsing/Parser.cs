@@ -77,10 +77,11 @@ public class Parser
         if (IsIdentifier(_tokens.Peek(), "print"))
         {
             ParsePrintStatement();
-            return;
         }
-
-        ParseExpressionStatement();
+        else
+        {
+            ParseExpressionStatement();
+        }
     }
 
     /// <summary>
@@ -193,7 +194,7 @@ public class Parser
     /// <summary>
     /// Разбирает и вычисляет выражение с необязательным унарным минусом.
     /// Правило:
-    ///     unary_expression = [ "-" ], primary_expression ;
+    ///     unary_expression = { "-" }, primary_expression ;
     /// </summary>
     private int ParseUnaryExpression()
     {

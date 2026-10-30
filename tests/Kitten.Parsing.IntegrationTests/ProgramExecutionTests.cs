@@ -60,6 +60,8 @@ public class ProgramExecutionTests
             { "func main() -> void { print(min(2, 3) + max(4, 5) * sqr(2)); }", "", "22\n" },
             { "func main() -> void { print(10 + 7 * (2 * 3 + 4) + 5 + -5); }", "", "80\n" },
             { "func main() -> void { print(10 * -2); }", "", "-20\n" },
+            { "func main() -> void { print(min(min(1, 2), 3)); }", "", "1\n" },
+            { "func main() -> void { print(sqr(sqr(2))); }", "", "16\n" },
         };
     }
 
